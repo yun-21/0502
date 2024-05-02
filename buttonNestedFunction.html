@@ -5,19 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    /* document.body.style.padding = 0;
-       document.body.style.margin = 0;  js에서는 이렇게 쓸 수 있음. */
-  </style>
+   
 </head>
 
 <body>
   <div id="root"></div>
   <script>
+    document.body.style.padding = 0;
+    document.body.style.margin = 0;
     let root = document.getElementById("root");
     let item = document.createElement("div");
     let btn = document.createElement("button");
