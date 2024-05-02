@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #root {
+      background-color: #d9d9d9;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #root>div {
+      background-color: darkgray;
+      height: 40%;
+      width: 100%;
+      position: absolute;
+      z-index: 1;
+    }
+
+    /* 버튼을 눌러서 root자식으로 왔을때 스타일지정 */
+    #root>button{ 
+      margin: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: gray;
+    }
+
+    /* 버튼을 누르기 전이나 버튼을 2번눌러서 다시 div자식으로 왔을때 스타일지정 */
+    #root>div>button {
+      margin: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div>
+      <button></button>
+    </div>
+  </div>
+  <script>
+    const root = document.getElementById("root");
+    const div = root.children[0];
+    const btn = div.children[0];
+    console.log(btn);
+    console.log(div);
+
+    function hidden() {
+      if (div.style.display === 'block') {
+        div.style.display = 'none';
+        root.appendChild(btn);
+      }
+      else {
+        div.style.display = 'block';
+        div.appendChild(btn);
+      }
+    }
+    btn.addEventListener('click', hidden);
+
+
+  </script>
+</body>
+
+</html>

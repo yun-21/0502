@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    /* document.body.style.padding = 0;
+       document.body.style.margin = 0;  js에서는 이렇게 쓸 수 있음. */
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    let root = document.getElementById("root");
+    let item = document.createElement("div");
+    let btn = document.createElement("button");
+    root.appendChild(item);
+    root.appendChild(btn);
+    btn.style.position = "absolute"; //부모 요소를 기준으로 배치
+    btn.style.zIndex = "1";
+    btn.style.width = "50px";
+    btn.style.height = "50px";
+    btn.style.margin = "20px";
+    btn.style.backgroundColor = "gray";
+
+    root.style.width = "100vw";
+    root.style.height = "100vh";
+    root.style.backgroundColor = "#D9D9D9"
+
+    item.style.position = "absolute"; //(절대위치지정)부모 요소를 기준으로 배치
+    // item.style.zIndex = "1";
+    item.style.width = "100%";
+    item.style.height = "40%";
+    item.style.backgroundColor = "darkgray";
+    item.style.display="block";
+    // console.dir(item);
+    // function hidden(){
+    //   if(item.style.display === 'block'){
+    //     item.style.display='none';
+    //   }
+    //   else{
+    //     item.style.display='block';
+    //   }
+    // }
+    // btn.addEventListener('click', hidden);
+
+    function clickElement(clickTriggerElement, targetElement, someText) { //매개변수를 통해 외부 객체 값들을 할당해줬음
+      function someEvent() {
+        if (targetElement.style.display === 'block') { //item display가 block일때 실행
+          targetElement.style.display = someText; //item display에 someText 객체 값인 none할당
+        }
+        else{ //item display가 block이 아닐때 실행
+          targetElement.style.display ='block'; //block값 직접 할당
+        }
+      }
+      clickTriggerElement.addEventListener('click', someEvent); //버튼을 누른다면 someEvent함수를 실행시킴
+
+      // clickTriggerElement.addEventListener('click', function(){  //또 다른 방법으론 이것도 있음
+      //   if (targetElement.style.display === 'block') {
+      //     targetElement.style.display = someText;
+      //   }
+      //   else {
+      //     targetElement.style.display = 'block';
+      //   }
+      // });
+    }
+
+    const elements = {  //함수에 쓰일 객체 초기화
+      triggerElement: btn,
+      targetElement: item,
+      someText: "none",
+    };
+
+    clickElement(elements.triggerElement, elements.targetElement, elements.someText); //clickElement 매개변수 값 할당
+
+  </script>
+</body>
+
+</html>
