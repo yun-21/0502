@@ -12,7 +12,6 @@
     }
   </style>
 </head>
-
 <body>
   <div id="root">
     <a href="#도화가"></a>
@@ -38,7 +37,7 @@
     //문서에서 아이디가 문자열 items인 요소를 찾아서 items라는 변수에 할당해줬다.
     let items = document.getElementById("items");
 
-    // loa라는 객체를 생성해서 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+    // loa라는 객체를 생성
     var loa = {
       name: ["도화가", "스트라이커", "호크아이"],
       level: [1610, 1605, 1560],
@@ -51,18 +50,15 @@
         "명예의 파편",
         "골드",
       ],
-
       gatshu: [
         16,
         34,
         21,
         3500,
       ],
-
       getgold: [10000, 9000, 10500],
       mygold: 2000000
     }
-
     root.children[0].innerHTML = `<h3>로스트 아크</h3>`;
     root.children[0].style.display = "flex";
     root.children[0].style.alignItems = "center";
@@ -90,8 +86,8 @@
       for (let j = 0; j < loa.level.length; j++) {
         if (loa.name[i] === '도화가') {
           if (loa.level[j] === 1605) {
-            items.children[0].children[0].innerHTML = loa.name[i] + ' ' + loa.level[j];
-            items.children[0].children[1].innerHTML = `레벨대에 맞는 Boss : ${loa.boss[0]}, ${loa.boss[1]}, ${loa.boss[2]} `;
+            items.children[0].children[0].innerHTML = `<h1>${loa.name[i]}</h1><h3>level : ${loa.level[j]}</h3>`;
+            items.children[0].children[1].innerHTML = `<h4>Boss : ${loa.boss[0]}, ${loa.boss[1]}, ${loa.boss[2]}</h4>`;
           }
         }
       }
@@ -107,8 +103,9 @@
     gundanjang.style.height = "240px";
 
     gundanjang.children[0].innerHTML = `<h3>일리하칸</h3>`;
+    let a = 1;
     function gunil() {
-      if (gundanjang.children[3].style.display === 'none') {
+      if (a === 1) {
         for (let i = 0; i < loa.ingredient1.length; i++) {
           if (loa.ingredient1[i] === '골드') {
             for (let j = 0; j < loa.getgold.length; j++) {
@@ -121,19 +118,18 @@
             gundanjang.children[3].innerHTML += loa.ingredient1[i] + ` : ` + loa.gatshu[i] + `<br>`;
           }
         }
-        gundanjang.children[3].style.display = 'block';
+        a -= 1;
       }
       else {
-        gundanjang.children[3].style.display = 'none';
-        gundanjang.children[3].innerHTML = ''; //innerHTML 초기화 (초기화 안하면 for문이 계속 저장됨)
+        gundanjang.children[3].innerHTML = '';
+        a += 1;
       }
     }
 
-    gundanjang.children[0].addEventListener('click', gunil);
-
     gundanjang.children[1].innerHTML = `<h3>상노탑</h3>`;
+    let b = 1;
     function guntop() {
-      if (gundanjang.children[4].style.display === 'none') {
+      if (b === 1) {
         for (let i = 0; i < loa.ingredient1.length; i++) {
           if (loa.ingredient1[i] === '골드') {
             for (let j = 0; j < loa.getgold.length; j++) {
@@ -146,19 +142,20 @@
             gundanjang.children[4].innerHTML += loa.ingredient1[i] + ` : ` + loa.gatshu[i] + `<br>`;
           }
         }
-        gundanjang.children[4].style.display = 'block';
+        b -= 1;
       }
-      else {
-        gundanjang.children[4].style.display = 'none';
-        gundanjang.children[4].innerHTML = '';//innerHTML 초기화 (초기화 안하면 for문이 계속 저장됨)
+      else if (b === 0) {
+        gundanjang.children[4].innerHTML = '';
+        b += 1;
       }
 
     }
     gundanjang.children[1].addEventListener('click', guntop);
 
     gundanjang.children[2].innerHTML = `<h3>하브렐슈드</h3>`;
+    let c = 1;
     function gunhashu() {
-      if (gundanjang.children[5].style.display === 'none') {
+      if (c === 1) {
         for (let i = 0; i < loa.ingredient1.length; i++) {
           if (loa.ingredient1[i] === '골드') {
             for (let j = 0; j < loa.getgold.length; j++) {
@@ -171,20 +168,24 @@
             gundanjang.children[5].innerHTML += loa.ingredient1[i] + ` : ` + loa.gatshu[i] + `<br>`;
           }
         }
-        gundanjang.children[5].style.display='block';
+        c -= 1;
       }
-      else{
-        gundanjang.children[5].style.display='none';
-        gundanjang.children[5].innerHTML='';//innerHTML 초기화 (초기화 안하면 for문이 계속 저장됨)
+      else if (c === 0) {
+        gundanjang.children[5].innerHTML = '';
+        c += 1;
       }
     }
-    gundanjang.children[2].addEventListener('click', gunhashu); //한번만 실행
+    gundanjang.children[0].addEventListener('click', gunil);
+    gundanjang.children[1].addEventListener('click', guntop);
+    gundanjang.children[2].addEventListener('click', gunhashu);
+
 
     let itemchild0 = items.children[0]; //도화가 부분
     let itchildfris = document.createElement("div");
     itemchild0.appendChild(itchildfris); //도화가div 자식으로 div생성
     itchildfris.style.display = "flex";
     itchildfris.style.gap = "100px";
+    itchildfris.style.height = "100px";
     itchildfris.style.alignItems = "center";
     //도화가div 자식인div 스타일지정
 
@@ -254,6 +255,165 @@
         });
       }
     }
+    const ElikZone = document.createElement("div");
+    itemchild0.appendChild(ElikZone);
+    let elikseoall = document.createElement("div");
+    ElikZone.appendChild(elikseoall);
+    const elikResultZone = document.createElement("div");
+    ElikZone.appendChild(elikResultZone);
+
+    ElikZone.style.display="flex";
+    ElikZone.style.alignItems="center";
+    ElikZone.style.gap="70px";
+
+
+    let choose = {
+      name: ["서포터", "딜러"],
+      characteristic: ["극신", "특신"],
+      conclusion: ["선각자", "진군"],
+      explain: ["딜량 19.95%, 스킬 쿨타임 11초", "딜량 19.95%, 스킬 쿨타임 11.6초", "딜량 22.16%, 스킬 쿨타임 12초", "추천하지않음"]
+    };
+
+    let elikname = document.createElement("div");
+    elikseoall.appendChild(elikname);
+    let eliksupport = document.createElement("div");
+    let elikdiller = document.createElement("div");
+    elikname.appendChild(eliksupport);
+    elikname.appendChild(elikdiller);
+    eliksupport.innerHTML = choose.name[0];
+    elikdiller.innerHTML = choose.name[1];
+    elikname.style.display = "flex";
+    elikname.style.gap = "50px";
+    elikname.style.height = "50px";
+    elikname.style.alignItems = "center";
+    eliksupport.addEventListener('click', function () {
+      if (elikdiller.style.color !== 'blue') {
+        eliksupport.style.color = "blue";
+        eliksupport.style.fontSize = "25px";
+        eliksupport.style.fontWeight = "600";
+      }
+    });
+    elikdiller.addEventListener('click', function () {
+      if (eliksupport.style.color !== 'blue') {
+        elikdiller.style.color = "blue";
+        elikdiller.style.fontSize = "25px";
+        elikdiller.style.fontWeight = "600";
+      }
+    });
+
+    let elikchar = document.createElement("div");
+    elikseoall.appendChild(elikchar);
+    let eliksin = document.createElement("div");
+    let elikear = document.createElement("div");
+    elikchar.appendChild(eliksin);
+    elikchar.appendChild(elikear);
+    eliksin.innerHTML = choose.characteristic[0];
+    elikear.innerHTML = choose.characteristic[1];
+    elikchar.style.display = "flex";
+    elikchar.style.gap = "50px";
+    elikchar.style.height = "50px";
+    elikchar.style.alignItems = "center";
+    elikchar.style.justifyContent="space-between";
+
+    eliksin.addEventListener('click', function () {
+      if (elikear.style.color !== 'blue') {
+        eliksin.style.color = "blue";
+        eliksin.style.fontSize = "25px";
+        eliksin.style.fontWeight = "600";
+      }
+    });
+    elikear.addEventListener('click', function () {
+      if (eliksin.style.color !== 'blue') {
+        elikear.style.color = "blue";
+        elikear.style.fontSize = "25px";
+        elikear.style.fontWeight = "600";
+      }
+    });
+
+    let elikcon = document.createElement("div");
+    elikseoall.appendChild(elikcon);
+    let eliksun = document.createElement("div");
+    let elikjin = document.createElement("div");
+    elikcon.appendChild(eliksun);
+    elikcon.appendChild(elikjin);
+    elikcon.style.display = "flex";
+    elikcon.style.gap = "50px";
+    elikcon.style.height = "50px";
+    elikcon.style.alignItems = "center";
+    eliksun.innerHTML = choose.conclusion[0];
+    elikjin.innerHTML = choose.conclusion[1];
+
+    eliksun.addEventListener('click', function () {
+      if (elikjin.style.color !== 'blue') {
+        eliksun.style.color = "blue";
+        eliksun.style.fontSize = "25px";
+        eliksun.style.fontWeight = "600";
+      }
+    });
+    elikjin.addEventListener('click', function () {
+      if (eliksun.style.color !== 'blue') {
+        elikjin.style.color = "blue";
+        elikjin.style.fontSize = "25px";
+        elikjin.style.fontWeight = "600";
+      }
+    });
+
+    const btnDiv = document.createElement("div");
+    const elikResultBtn = document.createElement("button");
+    const elikClearBtn = document.createElement("button");
+    elikseoall.appendChild(btnDiv);
+    btnDiv.appendChild(elikResultBtn);
+    btnDiv.appendChild(elikClearBtn);
+
+    btnDiv.style.display = "flex";
+    btnDiv.style.gap = "50px";
+    btnDiv.style.height = "50px";
+    btnDiv.style.alignItems = "center";
+    btnDiv.style.justifyContent="space-between";
+    elikResultBtn.innerHTML = "결과";
+    elikClearBtn.innerHTML = "초기화";
+
+    elikResultBtn.addEventListener('click', function(){
+      if(eliksupport.style.color === 'blue' && eliksin.style.color === 'blue' && eliksun.style.color === 'blue'){
+        elikResultZone.innerHTML=choose.explain[0];
+      }
+      else if(eliksupport.style.color === 'blue' && eliksin.style.color === 'blue' && elikjin.style.color === 'blue'){
+        elikResultZone.innerHTML=choose.explain[1];
+      }
+      else if(eliksupport.style.color === 'blue' && elikear.style.color === 'blue' && eliksun.style.color === 'blue'){
+        elikResultZone.innerHTML=choose.explain[2];
+      }
+      else if(eliksupport.style.color === 'blue' && elikear.style.color === 'blue' && elikjin.style.color === 'blue'){
+        elikResultZone.innerHTML=choose.explain[3];
+      }
+      else if(elikdiller.style.color==='blue'){
+        elikResultZone.innerHTML="도화가의 딜러는 적합하지않음";
+      }
+      else{
+        elikResultZone.innerHTML="선택지를 모두 선택해주세요.";
+      }
+    });
+    elikClearBtn.addEventListener('click', function(){
+        eliksupport.style.color ='';
+        eliksupport.style.fontSize = '';
+        eliksupport.style.fontWeight = '';
+        elikdiller.style.color ='';
+        elikdiller.style.fontSize = '';
+        elikdiller.style.fontWeight = '';
+        eliksin.style.color ='';
+        eliksin.style.fontSize = '';
+        eliksin.style.fontWeight = '';
+        elikear.style.color ='';
+        elikear.style.fontSize = '';
+        elikear.style.fontWeight = '';
+        eliksun.style.color ='';
+        eliksun.style.fontSize = '';
+        eliksun.style.fontWeight = '';
+        elikjin.style.color ='';
+        elikjin.style.fontSize = '';
+        elikjin.style.fontWeight = '';
+        elikResultZone.innerHTML='';
+    });
 
 
   </script>
